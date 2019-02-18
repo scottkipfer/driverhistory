@@ -18,7 +18,6 @@ defmodule CLI do
 
   defp process_args(_) do 
     IO.puts "usage: $ ./driverhistory <filename.txt>"
-    System.halt(2)
   end
 
   defp process_file({:error, _}), do: IO.puts "ERROR: File Not Found"
