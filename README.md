@@ -2,42 +2,7 @@
 
 ## Problem Statement
 
-Let's write some code to track driving history for people.
-
-The code will process an input file. You can either choose to accept the input via stdin (e.g. if you're using Ruby `cat input.txt | ruby yourcode.rb`), or as a file name given on the command line (e.g. `ruby yourcode.rb input.txt`). You can use any programming language that you want. Please choose a language that allows you to best demonstrate your programming ability.
-
-Each line in the input file will start with a command. There are two possible commands.
-
-The first command is Driver, which will register a new Driver in the app. Example:
-
-`Driver Dan`
-
-The second command is Trip, which will record a trip attributed to a driver. The line will be space delimited with the following fields: the command (Trip), driver name, start time, stop time, miles driven. Times will be given in the format of hours:minutes. We'll use a 24-hour clock and will assume that drivers never drive past midnight (the start time will always be before the end time). Example:
-
-`Trip Dan 07:15 07:45 17.3`
-
-Discard any trips that average a speed of less than 5 mph or greater than 100 mph.
-
-Generate a report containing each driver with total miles driven and average speed. Sort the output by most miles driven to least. Round miles and miles per hour to the nearest integer.
-
-Example input:
-
-```
-Driver Dan
-Driver Alex
-Driver Bob
-Trip Dan 07:15 07:45 17.3
-Trip Dan 06:12 06:32 21.8
-Trip Alex 12:01 13:16 42.0
-```
-
-Expected output:
-
-```
-Alex: 42 miles @ 34 mph
-Dan: 39 miles @ 47 mph
-Bob: 0 miles
-```
+Problem statement can be found at https://gist.github.com/dan-manges/1e1854d0704cb9132b74
 
 ## Assumptions
 
@@ -89,12 +54,12 @@ $ elixir --version
 ```
 
 
-Once installed you can build the application by running:
+Once installed you can build the application by going to the project root and running:
 ```
 $ mix escript.build
 ```
 
-Then to run the program
+Then to run the program:
 ```
 $ ./driverhistory <path-to-file>
 ```
@@ -115,4 +80,51 @@ $ mix docs
 ```
 
 You can then open `driverhistory/docs/index.html`
+
+## Thought Process
+
+I chose to approach this problem from the stand point that we were provided an event log in the form of a text file and we needed to populate the read-side based on the commands recieved.  Instead of populating a read-side database that could be queryed against We were just outputing the results back to the command line.
+
+This problem only required two commands: `Driver` and `Trip`.  The `Driver` command will create a new entry in the read side that will be affected by the succeding `Trip` commands.  Trip commands will apply trip values along with domain logic to the History entry for the corresponding driver.  The resulting history could be formated and prited out the the terminal.
+
+## Design
+
+The program consists of two modules:
+
+#### Cli Module
+This is the entry point into the application.  It handles parsing the command-line arguments as well as reading and processing the file read in from the arguments.
+
+Once the file is parsed the module is respondible for reducing the commands down to a List containing the history for each Driver.  The Cli Module using the Trip Module to do any domain logic nescessary to reduce the commands to history.
+
+Finally, once the history is produced the Cli Module outputs the entries back to the command line. The Cli Module uses the Trip Module to format the History Events correctly.
+
+#### Trip Module
+This contains domain logic to reduce commands to a Driver History
+
+see the `docs` for more information.
+
+## Technology Choice
+After considering the problem statement and thinking about the design of the system I chose to use Elixir to create this command line application.  Although javascirpt is my strongest language, I have been quickly picking up Elixir over the last month by reading *Programming Elixir >= 1/6* by Dave Thomas.  This probelm is simple enough and I wanted to apply what I have learned so far.
+
+#### Elixir Pros for this problem:
+
+1. Functional Programing -  This is a programing paradigm that I am picking up and enjoy coding in.
+
+2. Immutable Data - Having immutable data makes testing easy.  You don't have to to worry about data changing in unexpected ways.
+
+3. Pattern Matching - Besides being fun to program in, Pattern Matching leads to cleaner code, straight forward recursion and easier decomposition.
+
+4. Tooling -  Elixir comes with great tools that make testing and documentation really easy.  If you run the tests using `mix tests` you will see that `doc tests` were run.  `doc tests` allow you to put tests directly into the documentation.  This allows the user of the module to see examples of how each function is used and provides the security of tests.
+
+#### Elixir Cons for this problem:
+
+1. Needs to run on Erlang Vm - This requires the user to install Erlang and makes the program slow to start up. At least for this probelm there are other technology solutions that would be better for making a command line interface.
+
+2. File size - The resulting executable for this project was around 1.6Mbs
+
+3. Elixir's and Erlangs main draw is concurrent programing.  This is not needed for this problem so the real benfits of usign Elixir and Erlang are not seen.
+
+
+
+
 
