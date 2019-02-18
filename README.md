@@ -50,12 +50,69 @@ Bob: 0 miles
  ```
 
  - Unknown commands will be skipped
+ - Commands are case sensitive. `driver` or `trip` will be skipped.
  - Drivers will always be created before Trips are added. The following will never happen:
  ```
  Trip Dan 12:30 12:45 20
  Trip Dan
  ```
 
+## Derived Requirements
+
+- Must be able to parse command line arguments
+- Show help message if no filename is passed
+- Handle a wrong file name
+- Trips with speeds over 100mph will be ignored
+- Trips with speeds under 5mph will be ignored
+- Do not output '@ X mph' if no trips have been added to entry
+
+
 ## Installation
 
+To run this application you must have Erlang installed on your computer.
+
+It is recommended to install Elixir in order to generate documentation and run tests.
+
+follow the directions at https://elixir-lang.org/install.html or if you have brew on a MacOS run:
+
+```
+$ brew update
+$ brew install elixir
+```
+
+this will also install Erlang.
+
+To verify installation run:
+
+```
+$ elixir --version
+```
+
+
+Once installed you can build the application by running:
+```
+$ mix escript.build
+```
+
+Then to run the program
+```
+$ ./driverhistory <path-to-file>
+```
+
+## Tests
+
+To run tests make sure elixir is installed and run
+
+```
+$ mix test
+```
+
+## Documentation
+
+To view documentation run:
+```
+$ mix docs
+```
+
+You can then open `driverhistory/docs/index.html`
 
