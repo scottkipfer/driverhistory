@@ -83,9 +83,9 @@ You can then open `driverhistory/docs/index.html`
 
 ## Thought Process
 
-I chose to approach this problem from the stand point that we were provided an event log in the form of a text file and we needed to populate the read-side based on the commands recieved.  Instead of populating a read-side database that could be queryed against We were just outputing the results back to the command line.
+I chose to approach this problem from the stand point that we were provided an event log in the form of a text file and we needed to populate the read-side based on the commands received.  Instead of populating a read-side database that could be queried against We were just outputting the results back to the command line.
 
-This problem only required two commands: `Driver` and `Trip`.  The `Driver` command will create a new entry in the read side that will be affected by the succeding `Trip` commands.  Trip commands will apply trip values along with domain logic to the History entry for the corresponding driver.  The resulting history could be formated and prited out the the terminal.
+This problem only required two commands: `Driver` and `Trip`.  The `Driver` command will create a new entry in the read side that will be affected by the succeeding `Trip` commands.  Trip commands will apply trip values along with domain logic to the History entry for the corresponding driver.  The resulting history could be formatted and printed out to the terminal.
 
 ## Design
 
@@ -94,7 +94,7 @@ The program consists of two modules:
 #### Cli Module
 This is the entry point into the application.  It handles parsing the command-line arguments as well as reading and processing the file read in from the arguments.
 
-Once the file is parsed the module is respondible for reducing the commands down to a List containing the history for each Driver.  The Cli Module using the Trip Module to do any domain logic nescessary to reduce the commands to history.
+Once the file is parsed the module is responsible for reducing the commands down to a List containing the history for each Driver.  The Cli Module using the Trip Module to do any domain logic necessary to reduce the commands to history.
 
 Finally, once the history is produced the Cli Module outputs the entries back to the command line. The Cli Module uses the Trip Module to format the History Events correctly.
 
@@ -104,11 +104,11 @@ This contains domain logic to reduce commands to a Driver History
 see the `docs` for more information.
 
 ## Technology Choice
-After considering the problem statement and thinking about the design of the system I chose to use Elixir to create this command line application.  Although javascirpt is my strongest language, I have been quickly picking up Elixir over the last month by reading *Programming Elixir >= 1/6* by Dave Thomas.  This probelm is simple enough and I wanted to apply what I have learned so far.
+After considering the problem statement and thinking about the design of the system I chose to use Elixir to create this command line application.  Although javascirpt is my strongest language, I have been quickly picking up Elixir over the last month by reading *Programming Elixir >= 1/6* by Dave Thomas.  This problem is simple enough and I wanted to apply what I have learned so far.
 
 #### Elixir Pros for this problem:
 
-1. Functional Programing -  This is a programing paradigm that I am picking up and enjoy coding in.
+1. Functional Programming -  This is a programming paradigm that I am picking up and enjoy coding in.
 
 2. Immutable Data - Having immutable data makes testing easy.  You don't have to to worry about data changing in unexpected ways.
 
@@ -118,11 +118,11 @@ After considering the problem statement and thinking about the design of the sys
 
 #### Elixir Cons for this problem:
 
-1. Needs to run on Erlang Vm - This requires the user to install Erlang and makes the program slow to start up. At least for this probelm there are other technology solutions that would be better for making a command line interface.
+1. Needs to run on Erlang Vm - This requires the user to install Erlang and makes the program slow to start up. At least for this problem there are other technology solutions that would be better for making a command line interface.
 
-2. File size - The resulting executable for this project was around 1.6Mbs
+2. File size - The resulting executable for this project was around 1.6Mb
 
-3. Elixir's and Erlangs main draw is concurrent programing.  This is not needed for this problem so the real benfits of usign Elixir and Erlang are not seen.
+3. Elixir's and Erlang's main draw is concurrent programming.  This is not needed for this problem so the real benefits of using Elixir and Erlang are not seen.
 
 
 
