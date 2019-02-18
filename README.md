@@ -78,7 +78,9 @@ Problem statement can be found at https://gist.github.com/dan-manges/1e1854d0704
 - Must handle a wrong file name
 - Trips with speeds over 100mph will be ignored
 - Trips with speeds under 5mph will be ignored
+- Output should be formated as `$driver: $distance miles @ $speed mph`
 - Do not output '@ X mph' if no trips have been added to entry
+- Output should list Drivers History sorted by distance
 
 ## Thought Process
 
