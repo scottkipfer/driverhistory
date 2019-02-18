@@ -1,37 +1,5 @@
 # Driverhistory
 
-## Problem Statement
-
-Problem statement can be found at https://gist.github.com/dan-manges/1e1854d0704cb9132b74
-
-## Assumptions
-
- - Files will be in the correct format.  The following will never happen:
- ```
- Driver 1234
- Trip Dan text text text
- Trip Dan aa:bb cc:dd %$^
- ect...
- ```
-
- - Unknown commands will be skipped
- - Commands are case sensitive. `driver` or `trip` will be skipped.
- - Drivers will always be created before Trips are added. The following will never happen:
- ```
- Trip Dan 12:30 12:45 20
- Trip Dan
- ```
-
-## Derived Requirements
-
-- Must be able to parse command line arguments
-- Show help message if no filename is passed
-- Handle a wrong file name
-- Trips with speeds over 100mph will be ignored
-- Trips with speeds under 5mph will be ignored
-- Do not output '@ X mph' if no trips have been added to entry
-
-
 ## Installation
 
 To run this application you must have Erlang installed on your computer.
@@ -80,6 +48,37 @@ $ mix docs
 ```
 
 You can then open `driverhistory/docs/index.html`
+
+## Problem Statement
+
+Problem statement can be found at https://gist.github.com/dan-manges/1e1854d0704cb9132b74
+
+## Assumptions
+
+ - Files will be in the correct format.  The following will never happen:
+ ```
+ Driver 1234
+ Trip Dan text text text
+ Trip Dan aa:bb cc:dd %$^
+ ect...
+ ```
+
+ - Unknown commands will be skipped
+ - Commands are case sensitive. `driver` or `trip` will be skipped.
+ - Drivers will always be created before Trips are added. The following will never happen:
+ ```
+ Trip Dan 12:30 12:45 20
+ Trip Dan
+ ```
+
+## Derived Requirements
+
+- Must be able to parse command line arguments
+- Show help message if no filename is passed
+- Must handle a wrong file name
+- Trips with speeds over 100mph will be ignored
+- Trips with speeds under 5mph will be ignored
+- Do not output '@ X mph' if no trips have been added to entry
 
 ## Thought Process
 
@@ -130,6 +129,6 @@ I provide three types of testing in this program:
 
 1. Unit tests - These are located in the test folder.  The unit tests make sure individual functionality of the code base is working and will continue working as the code base changes.  Unit tests should be fundamental to any program.
 
-2. Doc tests - While this might not be unique to Elixir this is the first time I have came across writing functional tests in documentation.  I think it is great for providing examples to users on how to use each function and explaining different nuances for each function.  The only downside is it polutes the code base and in my opinion makes the code harder to read.  The tests seem to distract from the actual code.  This may be just becauase I'm not use to seeing test along side the functions they are testing.
+2. Doc tests - While this might not be unique to Elixir this is the first time I have came across writing functional tests in documentation.  I think it is great for providing examples to users on how to use each function and explaining different nuances for each function.  The only downside is it pollutes the code base and in my opinion makes the code harder to read.  The tests seem to distract from the actual code.  This may be because I'm not use to seeing test along side the functions they are testing.
 
-3. End to End tests - For this program it is passing an actual file to the program and validting that the output meets the requirements.  E2E tests are important for conveing the overall business requirents for the system.  If a code base has good E2E tests it makes it easy to understand the business requirements.
+3. End to End tests - For this program it is passing an actual file to the program and validating that the output meets the requirements.  E2E tests are important for conveying the overall business requirements for the system.  If a code base has good E2E tests it makes it easy to understand the business requirements.
